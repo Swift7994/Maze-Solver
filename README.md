@@ -15,9 +15,12 @@ This project creates a **Graphical User Interface (GUI)** for generating and sol
 Ensure you have **Python 3** installed. Check with:
 ```sh
 python3 --version
-
+```
 If you encounter this error:
+```sh
 ModuleNotFoundError: No module named '_tkinter'
-
+```
 You need to install Tkinter:
+```sh
 sudo apt-get install python3-tk
+```
