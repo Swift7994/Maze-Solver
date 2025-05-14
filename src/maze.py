@@ -35,6 +35,8 @@ class Maze:
                 cell.set_window(self._win)
                 cols.append(cell)
             self._cells.append(cols)
+            
+        for i in range(self._num_cols):
             for j in range(self._num_rows):
                 self._draw_cell(i, j)
             
