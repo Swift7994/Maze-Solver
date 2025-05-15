@@ -51,6 +51,26 @@ class Tests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Drawing a cell raised an exception: {e}")
 
+    def test_break_entrance_and_exit(self):
+        num_rows = 5
+        num_cols = 5
+        cell_size_x = 10
+        cell_size_y = 10
+        win = Window(200, 200)
+        maze = Maze(0, 0, num_rows, num_cols, cell_size_x, cell_size_y, win)
+
+        # Call the method under test
+        maze._break_entrance_and_exit()
+
+        entrance_cell = maze._cells[0][0]
+        exit_cell = maze._cells[num_cols - 1][num_rows - 1]
+
+        # Assert entrance top wall is removed
+        self.assertFalse(entrance_cell.has_top_wall, "Entrance cell's top wall should be removed.")
+
+        # Assert exit bottom wall is removed
+        self.assertFalse(exit_cell.has_bottom_wall, "Exit cell's bottom wall should be removed.")
+
 
 if __name__ == "__main__":
     unittest.main()
