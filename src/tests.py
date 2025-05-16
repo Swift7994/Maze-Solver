@@ -95,6 +95,13 @@ class Tests(unittest.TestCase):
                     self.assertEqual(cell.has_bottom_wall, below.has_top_wall,
                                      f"Inconsistent bottom/top wall at ({i}, {j})")
 
+    def test_reset_cells_visited(self):
+        self.maze._break_walls_r(0, 0)  # Visit all cells
+        self.maze._reset_cells_visited()
+        for col in self.maze._cells:
+            for cell in col:
+                self.assertFalse(cell._visited, f"Cell was not reset: {cell}")
+
     
 
 
