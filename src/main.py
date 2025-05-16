@@ -1,16 +1,15 @@
 from window import Window
-from point import Point
-from line import Line
-from cell import Cell
+from maze import Maze
 
 
 if __name__ == "__main__":
     win = Window(800, 600)
-    p1 = Point(50, 50)
-    p2 = Point(250, 250)
-    cell = Cell(50, 50, 250, 250)
-    cell.set_window(win)
-    cell.draw(fill="black", width=4)
+    maze = Maze(20, 20, 14, 19, 40, 40, win)
+    maze._break_entrance_and_exit()
+    maze._break_walls_r(0, 0)
+    maze._reset_cells_visited()
+    maze.solve()
+
     
     win.wait_for_close()
     
