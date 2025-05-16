@@ -71,6 +71,32 @@ class Tests(unittest.TestCase):
         # Assert exit bottom wall is removed
         self.assertFalse(exit_cell.has_bottom_wall, "Exit cell's bottom wall should be removed.")
 
+    def test_all_cells_visited_after_generation(self):
+        """All cells should be marked visited after recursive wall breaking."""
+        self.maze._break_walls_r(0, 0)
+        for col in self.maze._cells:
+            for cell in col:
+                self.assertTrue(cell._visited, f"Unvisited cell found: {cell}")
+
+    def test_wall_consistency_between_adjacent_cells(self):
+        """Walls between adjacent cells should be consistent after maze generation."""
+        self.maze._break_walls_r(0, 0)
+        for i in range(self.num_cols):
+            for j in range(self.num_rows):
+                cell = self.maze._cells[i][j]
+                # Check right neighbor
+                if i < self.num_cols - 1:
+                    right = self.maze._cells[i + 1][j]
+                    self.assertEqual(cell.has_right_wall, right.has_left_wall,
+                                     f"Inconsistent right/left wall at ({i}, {j})")
+                # Check bottom neighbor
+                if j < self.num_rows - 1:
+                    below = self.maze._cells[i][j + 1]
+                    self.assertEqual(cell.has_bottom_wall, below.has_top_wall,
+                                     f"Inconsistent bottom/top wall at ({i}, {j})")
+
+    
+
 
 if __name__ == "__main__":
     unittest.main()

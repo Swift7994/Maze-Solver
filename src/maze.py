@@ -101,3 +101,8 @@ class Maze:
                 current.has_right_wall = False
                 next_cell.has_left_wall = False
             self._break_walls_r(next_cell_i, next_cell_j)
+
+    def _reset_cells_visited(self):
+        for i in range(self._num_cols):
+            for j in range(self._num_rows):
+                self._cells[i][j]._visited = False
